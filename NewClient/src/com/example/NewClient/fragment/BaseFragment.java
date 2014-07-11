@@ -1,10 +1,11 @@
 package com.example.NewClient.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.app.Fragment;
 
 /**
  * Created by Bruce
@@ -14,6 +15,7 @@ import android.support.v4.app.Fragment;
 public abstract class BaseFragment extends Fragment {
 
     public  View view;
+    private Context ct;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -21,6 +23,12 @@ public abstract class BaseFragment extends Fragment {
         initData(savedInstanceState);
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+      //传递 context
+        ct = getActivity();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
