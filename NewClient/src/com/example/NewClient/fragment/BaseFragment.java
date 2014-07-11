@@ -20,6 +20,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //       onActivityCreated 是初始化数据的 q
         initData(savedInstanceState);
     }
 
@@ -33,6 +34,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          super.onCreateView(inflater, container, savedInstanceState);
+        //        onCreateView 是初始化 View
          view = initView(inflater);
         return view;
     }
