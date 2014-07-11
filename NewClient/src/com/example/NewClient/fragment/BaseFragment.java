@@ -20,7 +20,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //       onActivityCreated 是初始化数据的 q
+        //       onActivityCreated 是初始化数据
         initData(savedInstanceState);
     }
 
