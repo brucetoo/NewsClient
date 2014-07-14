@@ -87,6 +87,7 @@ public class LeftMenuFragment extends Fragment implements AdapterView.OnItemClic
 
     private void switchFragment(Fragment f) {
         if(f != null){
+            //判断是否是MainActivity的子类
             if(getActivity() instanceof MainActivity){
                 ((MainActivity)getActivity()).swithFragment(f);
             }

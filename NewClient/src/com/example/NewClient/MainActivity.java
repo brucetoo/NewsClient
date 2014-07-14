@@ -63,6 +63,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
 
     public void swithFragment(Fragment fragment){
+        //将主界面用切换后的fragment代替
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame,fragment).commit();
         slidingMenu.toggle();
     }

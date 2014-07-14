@@ -1,4 +1,4 @@
-package com.example.NewClient.fragment;
+package com.example.NewClient.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,10 +12,15 @@ import android.view.ViewGroup;
  * Data 2014/7/11
  * Time 15:17.
  */
+
 public abstract class BaseFragment extends Fragment {
 
+    /**
+     * 在定义基类 抽象类的时候 要传递Context，并且定义成public
+     */
     public  View view;
-    private Context ct;
+    //这个传递 context给子类很重要
+    public Context ct;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -31,6 +36,15 @@ public abstract class BaseFragment extends Fragment {
         ct = getActivity();
     }
 
+    /**
+     * 定义一个 对外暴露得到View的方法
+     */
+
+    public View getRootView(){
+        return view;
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          super.onCreateView(inflater, container, savedInstanceState);
@@ -40,7 +54,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * 初始化view
+     * 初始化view   抽象出方法子类调用
      */
     public abstract View initView(LayoutInflater inflater);
 
