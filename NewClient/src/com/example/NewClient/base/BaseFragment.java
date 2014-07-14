@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.example.NewClient.MainActivity;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 /**
  * Created by Bruce
@@ -22,6 +24,7 @@ public abstract class BaseFragment extends Fragment {
     //这个传递 context给子类很重要
     public Context ct;
 
+    public SlidingMenu slidingMenu;
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -34,6 +37,8 @@ public abstract class BaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
       //传递 context
         ct = getActivity();
+        //获取 main的slidingmenu传递到子类
+        slidingMenu = ((MainActivity)getActivity()).getSlidingMenu();
     }
 
     /**

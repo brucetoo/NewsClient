@@ -11,7 +11,11 @@ import com.example.NewClient.R;
 import com.example.NewClient.base.BaseFragment;
 import com.example.NewClient.base.BasePage;
 import com.example.NewClient.homepage.*;
+import com.example.NewClient.view.CustomViewPager;
 import com.example.NewClient.view.LazyViewPager;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,17 +27,18 @@ import java.util.List;
  */
 public class HomeFragment extends BaseFragment {
 
-
+    @ViewInject(R.id.main_radio)
     private RadioGroup radioGroup;
-    private LazyViewPager lazyViewPager;
-    private int checkedId = 0; //默认加载第几页
+    @ViewInject(R.id.viewpager)
+    private CustomViewPager viewPager;
+    private int checkedId = R.id.rb_function; //默认加载第几页
 
     @Override
     public View initView(LayoutInflater inflater) {
         View view = inflater.inflate(R.layout.main_fragment, null);
-        radioGroup = (RadioGroup) view.findViewById(R.id.main_radio);
-        lazyViewPager = (LazyViewPager) view.findViewById(R.id.viewpager);
-
+      //  radioGroup = (RadioGroup) view.findViewById(R.id.main_radio);
+       // viewPager = (CustomViewPager) view.findViewById(R.id.viewpager);
+        ViewUtils.inject(this, view); //注入view和事件
         return view;
     }
 
@@ -55,31 +60,58 @@ public class HomeFragment extends BaseFragment {
 
         HomePageAdapter adapter = new HomePageAdapter(ct, pages);
 
-        lazyViewPager.setAdapter(adapter);
+        viewPager.setAdapter(adapter);
 
+        viewPager.setOnPageChangeListener(new LazyViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //如果位置是0的话，才能出现滑动菜单。。如果是其他的tab出现的时候，滑动菜单就给屏蔽掉。
+                if (position == 0) {
+                    slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+                } else {
+                    slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+                }
+               //SlidingMenu s = ((MainActivity)getActivity()).getSlidingMenu();
+                /**
+                 * 获取该位置的page，初始化数据
+                 */
+                BasePage page =  pages.get(position);
+                page.initData();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
                     case R.id.rb_function:
                         //false 表示不加载中间页
-                        lazyViewPager.setCurrentItem(0, false);
+                        viewPager.setCurrentItem(0, false);
                         checkedId = 0;
                         break;
                     case R.id.rb_news_center:
-                        lazyViewPager.setCurrentItem(1, false);
+                        viewPager.setCurrentItem(1, false);
                         checkedId = 1;
                         break;
                     case R.id.rb_smart_service:
-                        lazyViewPager.setCurrentItem(2, false);
+                        viewPager.setCurrentItem(2, false);
                         checkedId = 2;
                         break;
                     case R.id.rb_gov_affairs:
-                        lazyViewPager.setCurrentItem(3, false);
+                        viewPager.setCurrentItem(3, false);
                         checkedId = 3;
                         break;
                     case R.id.rb_setting:
-                        lazyViewPager.setCurrentItem(4, false);
+                        viewPager.setCurrentItem(4, false);
                         checkedId = 4;
                         break;
                 }
@@ -123,7 +155,7 @@ public class HomeFragment extends BaseFragment {
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-          //  super.destroyItem(container, position, object);
+            //  super.destroyItem(container, position, object);
 
             ((LazyViewPager) container).removeView(pages.get(position).getRootView());
         }
