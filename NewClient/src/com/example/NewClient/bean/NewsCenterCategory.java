@@ -9,12 +9,12 @@ import java.util.List;
  */
 public class NewsCenterCategory {
 
-    public List<NewsCentreCategory> data;
+    public List<CentreCategory> data;
     public List<Integer> extend;
     public int retcode;
 
-    public static class NewsCentreCategory {
-        public List<NewsCentreCategoryItem> children;
+    public static class CentreCategory {
+        public List<CentreCategoryItem> children;
         public int id;
         public String title;
         public int type;
@@ -25,7 +25,7 @@ public class NewsCenterCategory {
         public String weekurl;
     }
 
-    public static class NewsCentreCategoryItem {
+    public static class CentreCategoryItem {
         public int id;
         public String title;
         public int type;

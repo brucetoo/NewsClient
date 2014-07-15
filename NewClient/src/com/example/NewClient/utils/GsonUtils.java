@@ -7,6 +7,11 @@ import com.google.gson.Gson;
  * Data 2014/7/14
  * Time 19:59.
  */
+
+
+/**
+ * Json 数据转换的工具类，用泛型
+ */
 public class GsonUtils {
     public static <T> T jsonToBean(String json, Class<T> clz) {
         Gson gson = new Gson();

@@ -13,7 +13,6 @@ import com.example.NewClient.base.BasePage;
 import com.example.NewClient.homepage.*;
 import com.example.NewClient.view.CustomViewPager;
 import com.example.NewClient.view.LazyViewPager;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -70,12 +69,12 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onPageSelected(int position) {
-                //如果位置是0的话，才能出现滑动菜单。。如果是其他的tab出现的时候，滑动菜单就给屏蔽掉。
+               /* //如果位置是0的话，才能出现滑动菜单。。如果是其他的tab出现的时候，滑动菜单就给屏蔽掉。
                 if (position == 0) {
                     slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
                 } else {
                     slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-                }
+                }*/
                //SlidingMenu s = ((MainActivity)getActivity()).getSlidingMenu();
                 /**
                  * 获取该位置的page，初始化数据

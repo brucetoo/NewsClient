@@ -14,6 +14,7 @@ public class MainActivity extends SlidingFragmentActivity {
      */
 
     private SlidingMenu slidingMenu;
+    private LeftMenuFragment menuFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,8 +25,7 @@ public class MainActivity extends SlidingFragmentActivity {
         setContentView(R.layout.main_frame);
 
         //Fragment fragment1 = new Fragment1();
-      //  getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fragment1).commit();
-
+        //  getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fragment1).commit();
 
 
         slidingMenu = getSlidingMenu();
@@ -47,7 +47,7 @@ public class MainActivity extends SlidingFragmentActivity {
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
         //创建fragment
-        LeftMenuFragment menuFragment = new LeftMenuFragment();
+         menuFragment = new LeftMenuFragment();
         //获取fragment的管理者
         getSupportFragmentManager()
                 //开启事物
@@ -61,10 +61,23 @@ public class MainActivity extends SlidingFragmentActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, homeFragment).commit();
     }
 
+    /**
+     * 跑出 menufragment的实例，以便调用
+     * @return
+     */
+    public LeftMenuFragment getMenuFragment(){
+        //此举是为了防止出现bug
+        menuFragment = (LeftMenuFragment) getSupportFragmentManager().findFragmentByTag("Menu");
+        return menuFragment;
+    }
 
-    public void swithFragment(Fragment fragment){
+    /**
+     * 点击Items时的切换
+     * @param fragment
+     */
+    public void swithFragment(Fragment fragment) {
         //将主界面用切换后的fragment代替
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame,fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fragment).commit();
         slidingMenu.toggle();
     }
 
